@@ -6,7 +6,7 @@ def foobar(n):
         div5 = True if i % 5 == 0 else False
         
         if div3: print('foo', end="")
-        if div5: print ('bar', end="")
+        if div5: print('bar', end="")
         if not div3 and not div5: print(str(i), end="")
         print()
         
