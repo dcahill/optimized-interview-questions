@@ -1,60 +1,85 @@
-def year_to_roman(year):
+def number_to_roman(number):
 
-    year = int(year)
-    year_roman = ""
-    year_thousands = year // 10**3 % 10
-    year_hundreds = year // 10**2 % 10
-    year_tens = year // 10**1 % 10
-    year_ones = year // 10**0 % 10
+    number = int(number)
+    number_roman_superscript = ""
+    number_roman = ""
+    number_millions = number // 10**6 % 10
+    number_hundred_thousands = number // 10**5 % 10
+    number_ten_thousands = number // 10**4 % 10
+    number_thousands = number // 10**3 % 10
+    number_hundreds = number // 10**2 % 10
+    number_tens = number // 10**1 % 10
+    number_ones = number // 10**0 % 10
 
-    # year input check
-    if year > 9999 or year < 0:
-        print("Invalid entry. Please enter a year between 0-9999:")
+    # number input check
+    if number > 3999999 or number < 0:
+        print("Invalid entry. Please enter a number between 0-3999999:")
         return
     
+    # add millions
+    number_roman = number_roman + ("M"*number_millions)
+    number_roman_superscript = number_roman_superscript + ("_"*number_millions)
+    # add hundred_thousands
+    if number_hundred_thousands == 9: number_roman = number_roman + "CM" ; number_roman_superscript = number_roman_superscript + ("__")
+    elif number_hundred_thousands == 4: number_roman = number_roman + "CD" ; number_roman_superscript = number_roman_superscript + ("__")
+    elif number_hundred_thousands < 4: number_roman = number_roman + ("C"*number_hundred_thousands) ; number_roman_superscript = number_roman_superscript + ("_"*(number_hundred_thousands))
+    else: number_roman = number_roman + "D" + ("C"*(number_hundred_thousands-5)) ; number_roman_superscript = number_roman_superscript + "_" + ("_"*(number_hundred_thousands-5))
+    # add ten_thousands
+    if number_ten_thousands == 9: number_roman = number_roman + "XC" ; number_roman_superscript = number_roman_superscript + ("__")
+    elif number_ten_thousands == 4: number_roman = number_roman + "XL" ; number_roman_superscript = number_roman_superscript + ("__")
+    elif number_ten_thousands < 4: number_roman = number_roman + ("X"*number_ten_thousands) ; number_roman_superscript = number_roman_superscript + ("_"*(number_ten_thousands))
+    else: number_roman = number_roman + "L" + ("X"*(number_ten_thousands-5)) ; number_roman_superscript = number_roman_superscript + "_" + ("_"*(number_ten_thousands-5))
     # add thousands
-    if year_thousands == 9: year_roman = year_roman + "_I_X"
-    elif year_thousands == 4: year_roman = year_roman + "_I_V"
-    elif year_thousands < 4: year_roman = year_roman + ("M"*year_thousands)
-    else: year_roman = year_roman + "_V" + ("M"*(year_thousands-5))
+    if number_thousands == 9: number_roman = number_roman + "IX" ; number_roman_superscript = number_roman_superscript + ("__")
+    elif number_thousands == 4: number_roman = number_roman + "IV" ; number_roman_superscript = number_roman_superscript + ("__")
+    elif number_thousands < 4: number_roman = number_roman + ("M"*number_thousands)
+    else: number_roman = number_roman + "V" + ("M"*(number_thousands-5)) ; number_roman_superscript = number_roman_superscript + ("_"*(number_thousands-5))
     # add hundreds
-    if year_hundreds == 9: year_roman = year_roman + "CM"
-    elif year_hundreds == 4: year_roman = year_roman + "CD"
-    elif year_hundreds < 4: year_roman = year_roman + ("D"*year_hundreds)
-    else: year_roman = year_roman + "D" + ("C"*(year_hundreds-5))
+    if number_hundreds == 9: number_roman = number_roman + "CM"
+    elif number_hundreds == 4: number_roman = number_roman + "CD"
+    elif number_hundreds < 4: number_roman = number_roman + ("D"*number_hundreds)
+    else: number_roman = number_roman + "D" + ("C"*(number_hundreds-5))
     # add tens
-    if year_tens == 9: year_roman = year_roman + "XC"
-    elif year_tens == 4: year_roman = year_roman + "XL"
-    elif year_tens < 4:  year_roman = year_roman + ("X"*year_tens)
-    else: year_roman = year_roman + "L" + ("X"*(year_tens-5))
+    if number_tens == 9: number_roman = number_roman + "XC"
+    elif number_tens == 4: number_roman = number_roman + "XL"
+    elif number_tens < 4:  number_roman = number_roman + ("X"*number_tens)
+    else: number_roman = number_roman + "L" + ("X"*(number_tens-5))
     # add ones
-    if year_ones == 9: year_roman = year_roman + "IX"
-    elif year_ones == 4: year_roman = year_roman + "IV"
-    elif year_ones < 4: year_roman = year_roman + ("I"*year_ones)
-    else: year_roman = year_roman + "V" + ("I"*(year_ones-5))
+    if number_ones == 9: number_roman = number_roman + "IX"
+    elif number_ones == 4: number_roman = number_roman + "IV"
+    elif number_ones < 4: number_roman = number_roman + ("I"*number_ones)
+    else: number_roman = number_roman + "V" + ("I"*(number_ones-5))
 
-    print(str(year_thousands)+str(year_hundreds)+str(year_tens)+str(year_ones), "=", year_roman)
+    output_decimal_number = int(str(number_millions)+str(number_hundred_thousands)+
+                              str(number_ten_thousands)+str(number_thousands)+
+                              str(number_hundreds)+str(number_tens)+str(number_ones))
+    print(" " * len(str(output_decimal_number)), " ", number_roman_superscript)
+    print(output_decimal_number, "=", number_roman + "\n")
 
 # test cases
-year_to_roman("0000")
-year_to_roman("2999")
-year_to_roman("1973")
-year_to_roman("1956")
-year_to_roman("2018")
-year_to_roman("2000")
-year_to_roman("0400")
-year_to_roman("0040")
-year_to_roman("0004")
+number_to_roman("0000")
+number_to_roman("2999")
+number_to_roman("1973")
+number_to_roman("1956")
+number_to_roman("2018")
+number_to_roman("2000")
+number_to_roman("0400")
+number_to_roman("0040")
+number_to_roman("0004")
 # extended test cases
-year_to_roman("1111")
-year_to_roman("2222")
-year_to_roman("3333")
-year_to_roman("4444")
-year_to_roman("5555")
-year_to_roman("6666")
-year_to_roman("7777")
-year_to_roman("8888")
-year_to_roman("9999")
+number_to_roman("1111")
+number_to_roman("2222")
+number_to_roman("3333")
+number_to_roman("4444")
+number_to_roman("5555")
+number_to_roman("6666")
+number_to_roman("7777")
+number_to_roman("8888")
+number_to_roman("9999")
+number_to_roman("49999")
+number_to_roman("499999")
+number_to_roman("669999")
+number_to_roman("3999999")
 
 while True:
-    year_to_roman(input("Enter a 4 digit year (Max 9999): "))
+    number_to_roman(input("Enter a number (Max 3999999): "))
