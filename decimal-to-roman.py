@@ -41,7 +41,7 @@ def number_to_roman(number):
     # add hundreds
     if number_hundreds == 9: number_roman = number_roman + "CM"
     elif number_hundreds == 4: number_roman = number_roman + "CD"
-    elif number_hundreds < 4: number_roman = number_roman + ("D"*number_hundreds)
+    elif number_hundreds < 4: number_roman = number_roman + ("C"*number_hundreds)
     else: number_roman = number_roman + "D" + ("C"*(number_hundreds-5))
     # add tens
     if number_tens == 9: number_roman = number_roman + "XC"
