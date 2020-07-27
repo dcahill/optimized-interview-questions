@@ -31,13 +31,13 @@ cells = ['[0]', '[1]', '[2]',
 
 # Main
 while 1:
+    draw_board(cells)
     if turn >= 9:
         print('Tie!')
         break
     if check_winner(cells):
         print('Winner!')
         break
-    draw_board(cells)
     if turn % 2 == 0:
         current_player = player_one
     else:
