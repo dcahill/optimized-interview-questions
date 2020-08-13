@@ -3,6 +3,8 @@ from random import choice
 def reset_game():
     global cells
     global game_over
+    global turns
+    turns = 0
     cells = {'a1':'', 'b1':'', 'c1':'', 'd1':'',
              'a2':'', 'b2':'', 'c2':'', 'd2':'',
              'a3':'', 'b3':'', 'c3':'', 'd3':'',
@@ -56,7 +58,10 @@ def check_win():
 
 # Check loss
 def check_lose():
-    if '' not in cells:
+    count = 0
+    for cell in cells:
+        if cells[cell] != '': count += 1
+    if count >= 16:
         print('You lost in %s turns!' % turns)
         game_over = True
         reset_game()
@@ -145,8 +150,9 @@ while True:
             check_win()
             check_lose() # NEEDS IMPROVEMENT, NOT JUST FULL DETECTION. SHOULD DETECT IF NO VALID MOVES ARE LEFT.
             move = input('Please enter direction to slide cells [W][A][S][D]: ')
-            print('-'*32)
+            print('\n')
             valid_move = check_move(move)
+        turns += 1
         move_cells(move)
 
         #check_move(move)
